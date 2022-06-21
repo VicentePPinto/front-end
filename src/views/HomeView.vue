@@ -1,17 +1,11 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <sidebarItem></sidebarItem>
+    <sidebar-component></sidebar-component>
   </div>
 </template>
 
-<script>
-import SidebarItem from '@/components/Sidebar.vue'
+<script setup>
+import SidebarComponent from '@/components/SidebarComponent.vue'
 
-export default {
-  name: 'HomeView',
-  components: {
-     'sidebarItem': SidebarItem
-  }
-}
+
 </script>
