@@ -1,10 +1,12 @@
 <template>
-  <div class="">
-    Home
+  <div>
+    
   </div>
 </template>
 
 <script setup>
-
-
 </script>
+
+<style scoped>
+
+</style>

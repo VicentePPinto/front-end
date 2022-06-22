@@ -44,16 +44,34 @@
 import {ref, watch} from 'vue';
 import { useRouter, useRoute } from 'vue-router'
 import { Switch } from '@headlessui/vue'
+import axios from 'axios'
+import Cookie from 'js-cookie'
     const enabled = ref(false)
     const email = ref(null)
     const password = ref(null)
     const router = useRouter()
     const route = useRoute()
     const loginStart = () =>{
-        if((email.value == 'admin@admin.com') && (password.value = 'pass')){
+
+        const payload ={
+            email: email.value,
+            password:password.value
+        }
+        const url = "http://localhost:8000/api/auth/login"
+         axios.post(url,payload).then((response) =>{
+           console.log(response)
+           const token = response.data.access_token
+           const user = [{
+               name: response.data.user.name,
+               email: response.data.user.email,
+               id: response.data.user.id,
+               id_aliancado: response.data.user.id_aliancado,
+           }]
+           Cookie.set('_studio_token', token )
+           Cookie.set('_studio_user', JSON.stringify(user) )
             const redirectPath = route.query.redirect || '/home';
             router.push(redirectPath);
-        }
+        })
     }
     watch(enabled, ()=> {
        if(enabled.value){
